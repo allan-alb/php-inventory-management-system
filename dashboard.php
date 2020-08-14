@@ -10,7 +10,7 @@ $orderSql = "SELECT * FROM orders WHERE order_status = 1";
 $orderQuery = $connect->query($orderSql);
 $countOrder = $orderQuery->num_rows;
 
-$totalRevenue = "";
+$totalRevenue = 0;
 while ($orderResult = $orderQuery->fetch_assoc()) {
 	$totalRevenue += $orderResult['paid'];
 }

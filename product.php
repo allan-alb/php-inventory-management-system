@@ -6,32 +6,32 @@
 
 		<ol class="breadcrumb">
 		  <li><a href="dashboard.php">Home</a></li>		  
-		  <li class="active">Product</li>
+		  <li class="active">Produto</li>
 		</ol>
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Manage Product</div>
+				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Gerenciar Produto</div>
 			</div> <!-- /panel-heading -->
 			<div class="panel-body">
 
 				<div class="remove-messages"></div>
 
 				<div class="div-action pull pull-right" style="padding-bottom:20px;">
-					<button class="btn btn-default button1" data-toggle="modal" id="addProductModalBtn" data-target="#addProductModal"> <i class="glyphicon glyphicon-plus-sign"></i> Add Product </button>
+					<button class="btn btn-default button1" data-toggle="modal" id="addProductModalBtn" data-target="#addProductModal"> <i class="glyphicon glyphicon-plus-sign"></i> Adicionar Produto </button>
 				</div> <!-- /div-action -->				
 				
 				<table class="table" id="manageProductTable">
 					<thead>
 						<tr>
-							<th style="width:10%;">Photo</th>							
-							<th>Product Name</th>
-							<th>Rate</th>							
-							<th>Quantity</th>
-							<th>Brand</th>
-							<th>Category</th>
+							<th style="width:10%;">Foto</th>							
+							<th>Nome do Produto</th>
+							<th>Valor</th>							
+							<th>Quantidade</th>
+							<th>Marca</th>
+							<th>Categoria</th>
 							<th>Status</th>
-							<th style="width:15%;">Options</th>
+							<th style="width:15%;">Opções</th>
 						</tr>
 					</thead>
 				</table>
@@ -51,7 +51,7 @@
     	<form class="form-horizontal" id="submitProductForm" action="php_action/createProduct.php" method="POST" enctype="multipart/form-data">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title"><i class="fa fa-plus"></i> Add Product</h4>
+	        <h4 class="modal-title"><i class="fa fa-plus"></i> Adicionar Produto</h4>
 	      </div>
 
 	      <div class="modal-body" style="max-height:450px; overflow:auto;">
@@ -59,48 +59,48 @@
 	      	<div id="add-product-messages"></div>
 
 	      	<div class="form-group">
-	        	<label for="productImage" class="col-sm-3 control-label">Product Image: </label>
+	        	<label for="productImage" class="col-sm-3 control-label">Imagem do produto: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 					    <!-- the avatar markup -->
 							<div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>							
 					    <div class="kv-avatar center-block">					        
-					        <input type="file" class="form-control" id="productImage" placeholder="Product Name" name="productImage" class="file-loading" style="width:auto;"/>
+					        <input type="file" class="form-control" id="productImage" placeholder="Imagem do Produto" name="productImage" class="file-loading" style="width:auto;"/>
 					    </div>
 				      
 				    </div>
 	        </div> <!-- /form-group-->	     	           	       
 
 	        <div class="form-group">
-	        	<label for="productName" class="col-sm-3 control-label">Product Name: </label>
+	        	<label for="productName" class="col-sm-3 control-label">Nome do produto: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="productName" placeholder="Product Name" name="productName" autocomplete="off">
+				      <input type="text" class="form-control" id="productName" placeholder="Nome do Produto" name="productName" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->	    
 
 	        <div class="form-group">
-	        	<label for="quantity" class="col-sm-3 control-label">Quantity: </label>
+	        	<label for="quantity" class="col-sm-3 control-label">Quantidade: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="quantity" placeholder="Quantity" name="quantity" autocomplete="off">
+				      <input type="text" class="form-control" id="quantity" placeholder="Quantidade" name="quantity" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->	        	 
 
 	        <div class="form-group">
-	        	<label for="rate" class="col-sm-3 control-label">Rate: </label>
+	        	<label for="rate" class="col-sm-3 control-label">Valor: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="rate" placeholder="Rate" name="rate" autocomplete="off">
+				      <input type="text" class="form-control" id="rate" placeholder="Valor" name="rate" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->	     	        
 
 	        <div class="form-group">
-	        	<label for="brandName" class="col-sm-3 control-label">Brand Name: </label>
+	        	<label for="brandName" class="col-sm-3 control-label">Nome da Marca: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <select class="form-control" id="brandName" name="brandName">
-				      	<option value="">~~SELECT~~</option>
+				      	<option value="">~~SELECIONAR~~</option>
 				      	<?php 
 				      	$sql = "SELECT brand_id, brand_name, brand_active, brand_status FROM brands WHERE brand_status = 1 AND brand_active = 1";
 								$result = $connect->query($sql);
@@ -115,11 +115,11 @@
 	        </div> <!-- /form-group-->	
 
 	        <div class="form-group">
-	        	<label for="categoryName" class="col-sm-3 control-label">Category Name: </label>
+	        	<label for="categoryName" class="col-sm-3 control-label">Nome da categoria: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <select type="text" class="form-control" id="categoryName" placeholder="Product Name" name="categoryName" >
-				      	<option value="">~~SELECT~~</option>
+				      <select type="text" class="form-control" id="categoryName" placeholder="Nome da categoria" name="categoryName" >
+				      	<option value="">~~SELECIONAR~~</option>
 				      	<?php 
 				      	$sql = "SELECT categories_id, categories_name, categories_active, categories_status FROM categories WHERE categories_status = 1 AND categories_active = 1";
 								$result = $connect->query($sql);
@@ -138,18 +138,18 @@
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <select class="form-control" id="productStatus" name="productStatus">
-				      	<option value="">~~SELECT~~</option>
-				      	<option value="1">Available</option>
-				      	<option value="2">Not Available</option>
+				      	<option value="">~~SELECIONAR~~</option>
+				      	<option value="1">Disponível</option>
+				      	<option value="2">Não Disponível</option>
 				      </select>
 				    </div>
 	        </div> <!-- /form-group-->	         	        
 	      </div> <!-- /modal-body -->
 	      
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Fechar</button>
 	        
-	        <button type="submit" class="btn btn-primary" id="createProductBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+	        <button type="submit" class="btn btn-primary" id="createProductBtn" data-loading-text="Carregando..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Salvar Alterações</button>
 	      </div> <!-- /modal-footer -->	      
      	</form> <!-- /.form -->	     
     </div> <!-- /modal-content -->    
@@ -165,21 +165,21 @@
     	    	
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Product</h4>
+	        <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Produto</h4>
 	      </div>
 	      <div class="modal-body" style="max-height:450px; overflow:auto;">
 
 	      	<div class="div-loading">
 	      		<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-						<span class="sr-only">Loading...</span>
+						<span class="sr-only">Carregando...</span>
 	      	</div>
 
 	      	<div class="div-result">
 
 				  <!-- Nav tabs -->
 				  <ul class="nav nav-tabs" role="tablist">
-				    <li role="presentation" class="active"><a href="#photo" aria-controls="home" role="tab" data-toggle="tab">Photo</a></li>
-				    <li role="presentation"><a href="#productInfo" aria-controls="profile" role="tab" data-toggle="tab">Product Info</a></li>    
+				    <li role="presentation" class="active"><a href="#photo" aria-controls="home" role="tab" data-toggle="tab">Foto</a></li>
+				    <li role="presentation"><a href="#productInfo" aria-controls="profile" role="tab" data-toggle="tab">Informação do Produto</a></li>    
 				  </ul>
 
 				  <!-- Tab panes -->
@@ -193,7 +193,7 @@
 				    	<div id="edit-productPhoto-messages"></div>
 
 				    	<div class="form-group">
-			        	<label for="editProductImage" class="col-sm-3 control-label">Product Image: </label>
+			        	<label for="editProductImage" class="col-sm-3 control-label">Imagem do Produto: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">							    				   
 						      <img src="" id="getProductImage" class="thumbnail" style="width:250px; height:250px;" />
@@ -201,20 +201,20 @@
 			        </div> <!-- /form-group-->	     	           	       
 				    	
 			      	<div class="form-group">
-			        	<label for="editProductImage" class="col-sm-3 control-label">Select Photo: </label>
+			        	<label for="editProductImage" class="col-sm-3 control-label">Selecionar Foto: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
 							    <!-- the avatar markup -->
 									<div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>							
 							    <div class="kv-avatar center-block">					        
-							        <input type="file" class="form-control" id="editProductImage" placeholder="Product Name" name="editProductImage" class="file-loading" style="width:auto;"/>
+							        <input type="file" class="form-control" id="editProductImage" placeholder="Imagem do Produto" name="editProductImage" class="file-loading" style="width:auto;"/>
 							    </div>
 						      
 						    </div>
 			        </div> <!-- /form-group-->	     	           	       
 
 			        <div class="modal-footer editProductPhotoFooter">
-				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Fechar</button>
 				        
 				        <!-- <button type="submit" class="btn btn-success" id="editProductImageBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button> -->
 				      </div>
@@ -230,35 +230,35 @@
 				    	<div id="edit-product-messages"></div>
 
 				    	<div class="form-group">
-			        	<label for="editProductName" class="col-sm-3 control-label">Product Name: </label>
+			        	<label for="editProductName" class="col-sm-3 control-label">Nome do Produto: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
-						      <input type="text" class="form-control" id="editProductName" placeholder="Product Name" name="editProductName" autocomplete="off">
+						      <input type="text" class="form-control" id="editProductName" placeholder="Nome do Produto" name="editProductName" autocomplete="off">
 						    </div>
 			        </div> <!-- /form-group-->	    
 
 			        <div class="form-group">
-			        	<label for="editQuantity" class="col-sm-3 control-label">Quantity: </label>
+			        	<label for="editQuantity" class="col-sm-3 control-label">Quantidade: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
-						      <input type="text" class="form-control" id="editQuantity" placeholder="Quantity" name="editQuantity" autocomplete="off">
+						      <input type="text" class="form-control" id="editQuantity" placeholder="Quantidade" name="editQuantity" autocomplete="off">
 						    </div>
 			        </div> <!-- /form-group-->	        	 
 
 			        <div class="form-group">
-			        	<label for="editRate" class="col-sm-3 control-label">Rate: </label>
+			        	<label for="editRate" class="col-sm-3 control-label">Valor: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
-						      <input type="text" class="form-control" id="editRate" placeholder="Rate" name="editRate" autocomplete="off">
+						      <input type="text" class="form-control" id="editRate" placeholder="Valor" name="editRate" autocomplete="off">
 						    </div>
 			        </div> <!-- /form-group-->	     	        
 
 			        <div class="form-group">
-			        	<label for="editBrandName" class="col-sm-3 control-label">Brand Name: </label>
+			        	<label for="editBrandName" class="col-sm-3 control-label">Nome da Marca: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
 						      <select class="form-control" id="editBrandName" name="editBrandName">
-						      	<option value="">~~SELECT~~</option>
+						      	<option value="">~~SELECIONAR~~</option>
 						      	<?php 
 						      	$sql = "SELECT brand_id, brand_name, brand_active, brand_status FROM brands WHERE brand_status = 1 AND brand_active = 1";
 										$result = $connect->query($sql);
@@ -273,11 +273,11 @@
 			        </div> <!-- /form-group-->	
 
 			        <div class="form-group">
-			        	<label for="editCategoryName" class="col-sm-3 control-label">Category Name: </label>
+			        	<label for="editCategoryName" class="col-sm-3 control-label">Nome da Categoria: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
 						      <select type="text" class="form-control" id="editCategoryName" name="editCategoryName" >
-						      	<option value="">~~SELECT~~</option>
+						      	<option value="">~~SELECIONAR~~</option>
 						      	<?php 
 						      	$sql = "SELECT categories_id, categories_name, categories_active, categories_status FROM categories WHERE categories_status = 1 AND categories_active = 1";
 										$result = $connect->query($sql);
@@ -296,17 +296,17 @@
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
 						      <select class="form-control" id="editProductStatus" name="editProductStatus">
-						      	<option value="">~~SELECT~~</option>
-						      	<option value="1">Available</option>
-						      	<option value="2">Not Available</option>
+						      	<option value="">~~SELECIONAR~~</option>
+						      	<option value="1">Disponível</option>
+						      	<option value="2">Não Disponível</option>
 						      </select>
 						    </div>
 			        </div> <!-- /form-group-->	         	        
 
 			        <div class="modal-footer editProductFooter">
-				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Fechar</button>
 				        
-				        <button type="submit" class="btn btn-success" id="editProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+				        <button type="submit" class="btn btn-success" id="editProductBtn" data-loading-text="Carregando..."> <i class="glyphicon glyphicon-ok-sign"></i> Salvar Alterações</button>
 				      </div> <!-- /modal-footer -->				     
 			        </form> <!-- /.form -->				     	
 				    </div>    
@@ -331,17 +331,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Remove Product</h4>
+        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Remover Produto</h4>
       </div>
       <div class="modal-body">
 
       	<div class="removeProductMessages"></div>
 
-        <p>Do you really want to remove ?</p>
+        <p>Tem certeza de que deseja remover?</p>
       </div>
       <div class="modal-footer removeProductFooter">
-        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-        <button type="button" class="btn btn-primary" id="removeProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Fechar</button>
+        <button type="button" class="btn btn-primary" id="removeProductBtn" data-loading-text="Carregando..."> <i class="glyphicon glyphicon-ok-sign"></i> Salvar alterações</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
