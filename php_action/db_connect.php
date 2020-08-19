@@ -14,4 +14,6 @@ if($connect->connect_error) {
   // echo "Successfully connected";
 }
 
+$connect->set_charset("utf8");
+
 ?>

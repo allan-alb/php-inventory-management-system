@@ -24,12 +24,15 @@
 				<table class="table" id="manageProductTable">
 					<thead>
 						<tr>
-							<th style="width:10%;">Foto</th>							
+							<th style="width:10%;">Foto</th>
+							<th>Código</th>					
 							<th>Nome do Produto</th>
-							<th>Valor</th>							
+							<th>Tipo</th>
+							<th>Matéria prima</th>
+							<th>Unidade</th>
 							<th>Quantidade</th>
-							<th>Marca</th>
-							<th>Categoria</th>
+							<th>Alerta de Qtde.</th>
+							<th>Preço</th>
 							<th>Status</th>
 							<th style="width:15%;">Opções</th>
 						</tr>
@@ -71,13 +74,71 @@
 				    </div>
 	        </div> <!-- /form-group-->	     	           	       
 
+			<div class="form-group">
+	        	<label for="productCode" class="col-sm-3 control-label">Código do produto: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="productCode" placeholder="Código do Produto" name="productCode" autocomplete="off" maxlength="30">
+				    </div>
+	        </div> <!-- /form-group-->	 
+
 	        <div class="form-group">
 	        	<label for="productName" class="col-sm-3 control-label">Nome do produto: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="productName" placeholder="Nome do Produto" name="productName" autocomplete="off">
+				      <input type="text" class="form-control" id="productName" placeholder="Nome do Produto" name="productName" autocomplete="off" maxlength="255">
 				    </div>
-	        </div> <!-- /form-group-->	    
+	        </div> <!-- /form-group-->
+			
+			<div class="form-group">
+	        	<label for="productType" class="col-sm-3 control-label">Tipo: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <select class="form-control" id="productType" name="productType">
+				      	<option value="">~~SELECIONAR~~</option>
+				      	<option value="1">Matéria prima</option>
+				      	<option value="2">Produto acabado</option>
+						<option value="3">Embalagem</option>
+				      </select>
+				    </div>
+			</div> <!-- /form-group-->
+			
+			<div class="form-group">
+	        	<label for="rawMaterial" class="col-sm-3 control-label">Matéria prima: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <select class="form-control" id="rawMaterial" name="rawMaterial">
+				      	<option value="">~~SELECIONAR~~</option>
+				      	<?php 
+									$sql = "SELECT product_id, product_name, status FROM product WHERE status = 1 AND product_type = 1";
+									$result = $connect->query($sql);
+
+									while($row = $result->fetch_array()) {
+										echo "<option value='".$row[0]."'>".$row[1]."</option>";
+									} // while
+				      	?>
+				      </select>
+				    </div>
+			</div> <!-- /form-group-->
+
+			<div class="form-group">
+	        	<label for="unitOfMeasure" class="col-sm-3 control-label">Unidade de medida: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <select class="form-control" id="unitOfMeasure" name="unitOfMeasure">
+				      	<option value="">~~SELECIONAR~~</option>
+				      	<?php 
+				      	$sql = "SELECT unit_id, unit_name, unit_status FROM unit_of_measure WHERE unit_status = 1";
+								$result = $connect->query($sql);
+
+								while($row = $result->fetch_array()) {
+									echo "<option value='".$row[0]."'>".$row[1]."</option>";
+								} // while
+								
+				      	?>
+				      </select>
+				    </div>
+	        </div> <!-- /form-group-->
 
 	        <div class="form-group">
 	        	<label for="quantity" class="col-sm-3 control-label">Quantidade: </label>
@@ -85,53 +146,90 @@
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="quantity" placeholder="Quantidade" name="quantity" autocomplete="off">
 				    </div>
-	        </div> <!-- /form-group-->	        	 
-
-	        <div class="form-group">
-	        	<label for="rate" class="col-sm-3 control-label">Valor: </label>
+			</div> <!-- /form-group-->
+			
+			<div class="form-group">
+	        	<label for="quantityAlert" class="col-sm-3 control-label">Alerta de quantidade: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="rate" placeholder="Valor" name="rate" autocomplete="off">
+				      <input type="text" class="form-control" id="quantityAlert" placeholder="Alerta de quantidade" name="quantityAlert" autocomplete="off">
 				    </div>
-	        </div> <!-- /form-group-->	     	        
+	        </div> <!-- /form-group-->
 
 	        <div class="form-group">
-	        	<label for="brandName" class="col-sm-3 control-label">Nome da Marca: </label>
+	        	<label for="productCost" class="col-sm-3 control-label">Valor de custo: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <select class="form-control" id="brandName" name="brandName">
+				      <input type="text" class="form-control" id="productCost" placeholder="Custo" name="productCost" autocomplete="off">
+				    </div>
+			</div> <!-- /form-group-->
+			
+			<div class="form-group">
+	        	<label for="productPrice" class="col-sm-3 control-label">Preço de venda: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="productPrice" placeholder="Preço" name="productPrice" autocomplete="off">
+				    </div>
+			</div> <!-- /form-group-->
+			
+			<div class="form-group">
+	        	<label for="productDescription" class="col-sm-3 control-label">Descrição: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <textarea class="form-control" id="productDescription" placeholder="Descrição" name="productDescription"></textarea>
+				    </div>
+			</div> <!-- /form-group-->
+			
+			<div class="form-group">
+	        	<label for="tributaryOrigin" class="col-sm-3 control-label">Origem fiscal: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <select class="form-control" id="tributaryOrigin" name="tributaryOrigin">
 				      	<option value="">~~SELECIONAR~~</option>
-				      	<?php 
-				      	$sql = "SELECT brand_id, brand_name, brand_active, brand_status FROM brands WHERE brand_status = 1 AND brand_active = 1";
-								$result = $connect->query($sql);
-
-								while($row = $result->fetch_array()) {
-									echo "<option value='".$row[0]."'>".$row[1]."</option>";
-								} // while
-								
-				      	?>
+						<option value="0">0 - Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8</option>
+						<option value="1">1 - Estrangeira - Importação direta, exceto a indicada no código 6</option>  
+				    <option value="2">2 - Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7</option>
+						<option value="3">3 - Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% e inferior...</option>
+						<option value="4">4 - Nacional, cuja produção tenha sido feita em conformidade com os processos produti...</option>
+						<option value="5">5 - Nacional, mercadoria ou bem com Conteúdo de Importação interior ou igal a 40%</option>
+						<option value="6">6 - Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX e...</option>
+						<option value="7">7 - Estrangeira - Adquirida no mercado interno, sem similar nacional, constante lista CA...</option>
+						<option value="8">8 - Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%</option>
 				      </select>
 				    </div>
-	        </div> <!-- /form-group-->	
+			</div> <!-- /form-group-->
 
-	        <div class="form-group">
-	        	<label for="categoryName" class="col-sm-3 control-label">Nome da categoria: </label>
+			<div class="form-group">
+	        	<label for="tributaryNCM" class="col-sm-3 control-label">NCM: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <select type="text" class="form-control" id="categoryName" placeholder="Nome da categoria" name="categoryName" >
-				      	<option value="">~~SELECIONAR~~</option>
-				      	<?php 
-				      	$sql = "SELECT categories_id, categories_name, categories_active, categories_status FROM categories WHERE categories_status = 1 AND categories_active = 1";
-								$result = $connect->query($sql);
-
-								while($row = $result->fetch_array()) {
-									echo "<option value='".$row[0]."'>".$row[1]."</option>";
-								} // while
-								
-				      	?>
-				      </select>
+				      <input type="text" class="form-control" id="tributaryNCM" placeholder="NCM" name="tributaryNCM" autocomplete="off" maxlength="20">
 				    </div>
-	        </div> <!-- /form-group-->					        	         	       
+			</div> <!-- /form-group-->
+			
+			<div class="form-group">
+	        	<label for="tributaryCEST" class="col-sm-3 control-label">CEST: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="tributaryCEST" placeholder="CEST" name="tributaryCEST" autocomplete="off" maxlength="20">
+				    </div>
+			</div> <!-- /form-group-->
+			
+			<div class="form-group">
+	        	<label for="tributaryGroup" class="col-sm-3 control-label">Grupo tributário: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <input type="number" class="form-control" id="tributaryGroup" placeholder="Grupo" name="tributaryGroup" autocomplete="off">
+				    </div>
+			</div> <!-- /form-group-->
+			
+			<div class="form-group">
+	        	<label for="tributaryBenefitCode" class="col-sm-3 control-label">Código de benefício fiscal: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="tributaryBenefitCode" placeholder="Código de benefício fiscal" name="tributaryBenefitCode" autocomplete="off" maxlength="20">
+				    </div>
+			</div> <!-- /form-group-->					        	         	       
 
 	        <div class="form-group">
 	        	<label for="productStatus" class="col-sm-3 control-label">Status: </label>
@@ -227,15 +325,73 @@
 				    	<form class="form-horizontal" id="editProductForm" action="php_action/editProduct.php" method="POST">				    
 				    	<br />
 
-				    	<div id="edit-product-messages"></div>
+							<div id="edit-product-messages"></div>
+							
+							<div class="form-group">
+								<label for="editProductCode" class="col-sm-3 control-label">Código do produto: </label>
+								<label class="col-sm-1 control-label">: </label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" id="editProductCode" placeholder="Código do Produto" name="editProductCode" autocomplete="off" maxlength="30">
+								</div>
+							</div> <!-- /form-group-->	
 
 				    	<div class="form-group">
 			        	<label for="editProductName" class="col-sm-3 control-label">Nome do Produto: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
-						      <input type="text" class="form-control" id="editProductName" placeholder="Nome do Produto" name="editProductName" autocomplete="off">
+						      <input type="text" class="form-control" id="editProductName" placeholder="Nome do Produto" name="editProductName" autocomplete="off" maxlength="255">
 						    </div>
-			        </div> <!-- /form-group-->	    
+							</div> <!-- /form-group-->
+							
+							<div class="form-group">
+								<label for="editProductType" class="col-sm-3 control-label">Tipo: </label>
+								<label class="col-sm-1 control-label">: </label>
+								<div class="col-sm-8">
+									<select class="form-control" id="editProductType" name="editProductType">
+										<option value="">~~SELECIONAR~~</option>
+										<option value="1">Matéria prima</option>
+										<option value="2">Produto acabado</option>
+										<option value="3">Embalagem</option>
+									</select>
+								</div>
+							</div> <!-- /form-group-->
+
+							<div class="form-group">
+								<label for="editRawMaterial" class="col-sm-3 control-label">Matéria prima: </label>
+								<label class="col-sm-1 control-label">: </label>
+								<div class="col-sm-8">
+									<select class="form-control" id="editRawMaterial" name="editRawMaterial">
+										<option value="">~~SELECIONAR~~</option>
+										<?php 
+											$sql = "SELECT product_id, product_name, status FROM product WHERE status = 1 AND product_type = 1";
+											$result = $connect->query($sql);
+
+											while($row = $result->fetch_array()) {
+												echo "<option value='".$row[0]."'>".$row[1]."</option>";
+											} // while	
+										?>
+									</select>
+								</div>
+							</div> <!-- /form-group-->
+
+							<div class="form-group">
+								<label for="editUnitOfMeasure" class="col-sm-3 control-label">Unidade de medida: </label>
+								<label class="col-sm-1 control-label">: </label>
+								<div class="col-sm-8">
+									<select class="form-control" id="editUnitOfMeasure" name="editUnitOfMeasure">
+										<option value="">~~SELECIONAR~~</option>
+										<?php 
+										$sql = "SELECT unit_id, unit_name, unit_status FROM unit_of_measure WHERE unit_status = 1";
+										$result = $connect->query($sql);
+
+										while($row = $result->fetch_array()) {
+											echo "<option value='".$row[0]."'>".$row[1]."</option>";
+										} // while
+										
+										?>
+									</select>
+								</div>
+							</div> <!-- /form-group-->
 
 			        <div class="form-group">
 			        	<label for="editQuantity" class="col-sm-3 control-label">Quantidade: </label>
@@ -243,53 +399,90 @@
 						    <div class="col-sm-8">
 						      <input type="text" class="form-control" id="editQuantity" placeholder="Quantidade" name="editQuantity" autocomplete="off">
 						    </div>
-			        </div> <!-- /form-group-->	        	 
+							</div> <!-- /form-group-->
+							
+							<div class="form-group">
+								<label for="editQuantityAlert" class="col-sm-3 control-label">Alerta de quantidade: </label>
+								<label class="col-sm-1 control-label">: </label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" id="editQuantityAlert" placeholder="Alerta de quantidade" name="editQuantityAlert" autocomplete="off">
+								</div>
+							</div> <!-- /form-group-->
 
 			        <div class="form-group">
-			        	<label for="editRate" class="col-sm-3 control-label">Valor: </label>
-			        	<label class="col-sm-1 control-label">: </label>
-						    <div class="col-sm-8">
-						      <input type="text" class="form-control" id="editRate" placeholder="Valor" name="editRate" autocomplete="off">
-						    </div>
-			        </div> <!-- /form-group-->	     	        
+								<label for="editProductCost" class="col-sm-3 control-label">Valor de custo: </label>
+								<label class="col-sm-1 control-label">: </label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" id="editProductCost" placeholder="Custo" name="editProductCost" autocomplete="off" />
+								</div>
+							</div> <!-- /form-group-->
+					
+							<div class="form-group">
+										<label for="editProductPrice" class="col-sm-3 control-label">Preço de venda: </label>
+										<label class="col-sm-1 control-label">: </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="editProductPrice" placeholder="Preço" name="editProductPrice" autocomplete="off">
+										</div>
+							</div> <!-- /form-group-->
+	
+							<div class="form-group">
+								<label for="editProductDescription" class="col-sm-3 control-label">Descrição: </label>
+								<label class="col-sm-1 control-label">: </label>
+								<div class="col-sm-8">
+									<textarea class="form-control" id="editProductDescription" placeholder="Descrição" name="editProductDescription"></textarea>
+								</div>
+							</div> <!-- /form-group-->
+							
+							<div class="form-group">
+								<label for="editTributaryOrigin" class="col-sm-3 control-label">Origem fiscal: </label>
+								<label class="col-sm-1 control-label">: </label>
+								<div class="col-sm-8">
+									<select class="form-control" id="editTributaryOrigin" name="editTributaryOrigin">
+										<option value="">~~SELECIONAR~~</option>
+										<option value="0">0 - Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8</option>
+										<option value="1">1 - Estrangeira - Importação direta, exceto a indicada no código 6</option>  
+										<option value="2">2 - Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7</option>
+										<option value="3">3 - Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% e inferior...</option>
+										<option value="4">4 - Nacional, cuja produção tenha sido feita em conformidade com os processos produti...</option>
+										<option value="5">5 - Nacional, mercadoria ou bem com Conteúdo de Importação interior ou igal a 40%</option>
+										<option value="6">6 - Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX e...</option>
+										<option value="7">7 - Estrangeira - Adquirida no mercado interno, sem similar nacional, constante lista CA...</option>
+										<option value="8">8 - Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%</option>
+									</select>
+								</div>
+							</div> <!-- /form-group-->
 
-			        <div class="form-group">
-			        	<label for="editBrandName" class="col-sm-3 control-label">Nome da Marca: </label>
-			        	<label class="col-sm-1 control-label">: </label>
-						    <div class="col-sm-8">
-						      <select class="form-control" id="editBrandName" name="editBrandName">
-						      	<option value="">~~SELECIONAR~~</option>
-						      	<?php 
-						      	$sql = "SELECT brand_id, brand_name, brand_active, brand_status FROM brands WHERE brand_status = 1 AND brand_active = 1";
-										$result = $connect->query($sql);
-
-										while($row = $result->fetch_array()) {
-											echo "<option value='".$row[0]."'>".$row[1]."</option>";
-										} // while
-										
-						      	?>
-						      </select>
-						    </div>
-			        </div> <!-- /form-group-->	
-
-			        <div class="form-group">
-			        	<label for="editCategoryName" class="col-sm-3 control-label">Nome da Categoria: </label>
-			        	<label class="col-sm-1 control-label">: </label>
-						    <div class="col-sm-8">
-						      <select type="text" class="form-control" id="editCategoryName" name="editCategoryName" >
-						      	<option value="">~~SELECIONAR~~</option>
-						      	<?php 
-						      	$sql = "SELECT categories_id, categories_name, categories_active, categories_status FROM categories WHERE categories_status = 1 AND categories_active = 1";
-										$result = $connect->query($sql);
-
-										while($row = $result->fetch_array()) {
-											echo "<option value='".$row[0]."'>".$row[1]."</option>";
-										} // while
-										
-						      	?>
-						      </select>
-						    </div>
-			        </div> <!-- /form-group-->					        	         	       
+							<div class="form-group">
+								<label for="editTributaryNCM" class="col-sm-3 control-label">NCM: </label>
+								<label class="col-sm-1 control-label">: </label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" id="editTributaryNCM" placeholder="NCM" name="editTributaryNCM" autocomplete="off" maxlength="20">
+								</div>
+							</div> <!-- /form-group-->
+							
+							<div class="form-group">
+								<label for="editTributaryCEST" class="col-sm-3 control-label">CEST: </label>
+								<label class="col-sm-1 control-label">: </label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" id="editTributaryCEST" placeholder="CEST" name="editTributaryCEST" autocomplete="off" maxlength="20">
+								</div>
+							</div> <!-- /form-group-->
+							
+							<div class="form-group">
+								<label for="editTributaryGroup" class="col-sm-3 control-label">Grupo tributário: </label>
+								<label class="col-sm-1 control-label">: </label>
+								<div class="col-sm-8">
+									<input type="number" class="form-control" id="editTributaryGroup" placeholder="Grupo" name="editTributaryGroup" autocomplete="off">
+								</div>
+							</div> <!-- /form-group-->
+							
+							<div class="form-group">
+								<label for="editTributaryBenefitCode" class="col-sm-3 control-label">Código de benefício fiscal: </label>
+								<label class="col-sm-1 control-label">: </label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" id="editTributaryBenefitCode" placeholder="Código de benefício fiscal" name="editTributaryBenefitCode" autocomplete="off" maxlength="20">
+								</div>
+							</div> <!-- /form-group-->
 
 			        <div class="form-group">
 			        	<label for="editProductStatus" class="col-sm-3 control-label">Status: </label>

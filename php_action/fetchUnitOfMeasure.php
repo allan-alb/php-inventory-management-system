@@ -2,7 +2,7 @@
 
 require_once 'core.php';
 
-$sql = "SELECT unit_id, unit_name, unit_value, unit_status FROM unit_of_measure WHERE unit_status = 1";
+$sql = "SELECT unit_id, unit_name, unit_value, unit_status FROM unit_of_measure";
 $result = $connect->query($sql);
 
 $output = array('data' => array());

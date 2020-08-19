@@ -4,12 +4,12 @@
 
 require_once 'core.php';
 
-$sql = "SELECT product.product_id, product.product_name, product.product_image, product.brand_id,
- 		product.categories_id, product.quantity, product.rate, product.active, product.status, 
- 		brands.brand_name, categories.categories_name FROM product 
-		INNER JOIN brands ON product.brand_id = brands.brand_id 
-		INNER JOIN categories ON product.categories_id = categories.categories_id  
-		WHERE product.status = 1 AND product.quantity>0";
+$sql = "SELECT product.product_id, product.product_code, product.product_name, product.product_image, product.product_type,
+		product.raw_material, raw_product.product_name, product.unit_id, unit.unit_name, product.quantity, product.quantity_alert, 
+		product.product_cost, product.product_price, product.product_description, product.status FROM product 
+		INNER JOIN unit_of_measure AS unit ON product.unit_id = unit.unit_id 
+		LEFT JOIN product AS raw_product ON product.raw_material = raw_product.product_id
+		WHERE product.active = 1";
 
 $result = $connect->query($sql);
 
@@ -18,17 +18,35 @@ $output = array('data' => array());
 if($result->num_rows > 0) { 
 
  // $row = $result->fetch_array();
- $active = ""; 
+ $status = ""; 
+ $type = "";
 
  while($row = $result->fetch_array()) {
- 	$productId = $row[0];
- 	// active 
- 	if($row[7] == 1) {
+	$productId = $row[0];
+	
+	// type
+	switch ($row[4]) {
+		case '1':
+			$type = "<label class='label label-default'>Matéria prima</label>";
+			break;
+		case '2':
+			$type = "<label class='label label-primary'>Produto acabado</label>";
+			break;
+		case '3':
+			$type = "<label class='label label-info'>Embalagem</label>";
+			break;
+		default:
+			$type = "<label class='label label-danger'>Tipo inválido</label>";
+			break;
+	}
+
+ 	// status 
+ 	if($row[14] == 1) {
  		// activate member
- 		$active = "<label class='label label-success'>Available</label>";
+ 		$status = "<label class='label label-success'>Disponível</label>";
  	} else {
  		// deactivate member
- 		$active = "<label class='label label-danger'>Not Available</label>";
+ 		$status = "<label class='label label-danger'>Não Disponível</label>";
  	} // /else
 
  	$button = '<!-- Single button -->
@@ -37,40 +55,41 @@ if($result->num_rows > 0) {
 	    Action <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu">
-	    <li><a type="button" data-toggle="modal" id="editProductModalBtn" data-target="#editProductModal" onclick="editProduct('.$productId.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-	    <li><a type="button" data-toggle="modal" data-target="#removeProductModal" id="removeProductModalBtn" onclick="removeProduct('.$productId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
+	    <li><a type="button" data-toggle="modal" id="editProductModalBtn" data-target="#editProductModal" onclick="editProduct('.$productId.')"> <i class="glyphicon glyphicon-edit"></i> Editar</a></li>
+	    <li><a type="button" data-toggle="modal" data-target="#removeProductModal" id="removeProductModalBtn" onclick="removeProduct('.$productId.')"> <i class="glyphicon glyphicon-trash"></i> Remover</a></li>       
 	  </ul>
 	</div>';
 
-	// $brandId = $row[3];
-	// $brandSql = "SELECT * FROM brands WHERE brand_id = $brandId";
-	// $brandData = $connect->query($sql);
-	// $brand = "";
-	// while($row = $brandData->fetch_assoc()) {
-	// 	$brand = $row['brand_name'];
-	// }
+	$unit = $row[8];
+	$raw = $row[6];
+	$quantity = str_replace('.', ',', substr($row[9], 0, -1));
+	$quantityAlert = $row[10] ? str_replace('.', ',', substr($row[10], 0, -1)) : '';
+	$price = str_replace('.', ',', substr($row[12], 0, -2));
 
-	$brand = $row[9];
-	$category = $row[10];
-
-	$imageUrl = substr($row[2], 3);
+	$imageUrl = substr($row[3], 3);
 	$productImage = "<img class='img-round' src='".$imageUrl."' style='height:30px; width:50px;'  />";
 
  	$output['data'][] = array( 		
  		// image
- 		$productImage,
+		$productImage,
+		// product code
+		$row[1], 
  		// product name
- 		$row[1], 
- 		// rate
- 		$row[6],
- 		// quantity 
- 		$row[5], 		 	
- 		// brand
- 		$brand,
- 		// category 		
- 		$category,
- 		// active
- 		$active,
+		$row[2], 
+		// product type
+		$type,
+		// raw material
+		$raw,
+		// unit
+		$unit,
+		// quantity
+		$quantity, // $row[9],
+		// quantity_alert
+		$quantityAlert, // $row[10], 
+ 		// price
+ 		$price, // $row[12],
+ 		// status
+ 		$status,
  		// button
  		$button 		
  		); 	

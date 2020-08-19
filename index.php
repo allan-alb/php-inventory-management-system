@@ -45,7 +45,7 @@ if($_POST) {
 				$errors[] = "Incorrect username/password combination";
 			} // /else
 		} else {		
-			$errors[] = "Username doesnot exists";		
+			$errors[] = "Username does not exist";		
 		} // /else
 	} // /else not empty username // password
 	

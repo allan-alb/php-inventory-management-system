@@ -22,11 +22,17 @@
   <!-- file input -->
   <link rel="stylesheet" href="assests/plugins/fileinput/css/fileinput.min.css">
 
+  <!-- number convertion -->
+  <script src="custom/js/convertNumber.js"></script>
+
   <!-- jquery -->
 	<script src="assests/jquery/jquery.min.js"></script>
   <!-- jquery ui -->  
   <link rel="stylesheet" href="assests/jquery-ui/jquery-ui.min.css">
   <script src="assests/jquery-ui/jquery-ui.min.js"></script>
+
+  <!-- jquery mask -->
+  <script src="assests/jquery/jquery.mask.min.js"></script>
 
   <!-- bootstrap js -->
 	<script src="assests/bootstrap/js/bootstrap.min.js"></script>
@@ -64,7 +70,7 @@
         <li id="navCategories"><a href="categories.php"> <i class="glyphicon glyphicon-th-list"></i> Category</a></li>        
 		<?php } ?>
 		<?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-        <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Product </a></li> 
+        <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Produto </a></li> 
 		<?php } ?>
 		
         <li class="dropdown" id="navOrder">
