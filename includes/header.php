@@ -62,16 +62,19 @@
 
       <ul class="nav navbar-nav navbar-right">        
 
-      	<li id="navDashboard"><a href="index.php"><i class="glyphicon glyphicon-list-alt"></i>  Dashboard</a></li>        
+        <li id="navDashboard"><a href="index.php"><i class="glyphicon glyphicon-list-alt"></i>  Dashboard</a></li>
+
         <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-        <li id="navBrand"><a href="unit_of_measure.php"><i class="glyphicon glyphicon-gbp"></i>  Unidade de medida</a></li>        
-		<?php } ?>
-		<?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-        <li id="navCategories"><a href="categories.php"> <i class="glyphicon glyphicon-th-list"></i> Category</a></li>        
-		<?php } ?>
-		<?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-        <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Produto </a></li> 
-		<?php } ?>
+          <li id="navPerson"><a href="people.php"> <i class="glyphicon glyphicon-user"></i> Pessoa</a></li>
+        <?php } ?>
+
+        <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+            <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Produto </a></li> 
+        <?php } ?>
+
+        <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+            <li id="navUnit"><a href="unit_of_measure.php"><i class="glyphicon glyphicon-gbp"></i>  Unidade de medida</a></li>        
+        <?php } ?>
 		
         <li class="dropdown" id="navOrder">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-shopping-cart"></i> Orders <span class="caret"></span></a>
@@ -81,19 +84,21 @@
           </ul>
         </li> 
 		
-		<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-        <li id="navReport"><a href="report.php"> <i class="glyphicon glyphicon-check"></i> Report </a></li>
-		<?php } ?> 
-    <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-        <li id="importbrand"><a href="importbrand.php"> <i class="glyphicon glyphicon-check"></i> Import Brand </a></li>
-		<?php } ?>   
+        <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+            <li id="navReport"><a href="report.php"> <i class="glyphicon glyphicon-check"></i> Report </a></li>
+        <?php } ?> 
+
+        <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+            <li id="importbrand"><a href="importbrand.php"> <i class="glyphicon glyphicon-check"></i> Import Brand </a></li>
+        <?php } ?>
+
         <li class="dropdown" id="navSetting">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-cog"></i> <span class="caret"></span></a>
           <ul class="dropdown-menu">    
-			<?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-            <li id="topNavSetting"><a href="setting.php"> <i class="glyphicon glyphicon-wrench"></i> Setting</a></li>
-            <li id="topNavUser"><a href="user.php"> <i class="glyphicon glyphicon-wrench"></i> Add User</a></li>
-<?php } ?>              
+            <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+              <li id="topNavSetting"><a href="setting.php"> <i class="glyphicon glyphicon-wrench"></i> Setting</a></li>
+              <li id="topNavUser"><a href="user.php"> <i class="glyphicon glyphicon-wrench"></i> Add User</a></li>
+            <?php } ?>              
             <li id="topNavLogout"><a href="logout.php"> <i class="glyphicon glyphicon-log-out"></i> Logout</a></li>            
           </ul>
         </li>        

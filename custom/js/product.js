@@ -596,7 +596,7 @@ function removeProduct(productId = null) {
 
 					} // /error
 				} // /success function
-			}); // /ajax fucntion to remove the product
+			}); // /ajax function to remove the product
 			return false;
 		}); // /remove product btn clicked
 	} // /if productid
