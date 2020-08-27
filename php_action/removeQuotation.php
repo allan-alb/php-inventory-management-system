@@ -9,9 +9,9 @@ $quotationId = $_POST['quotationId'];
 
 if($quotationId) { 
 
- $sql = "UPDATE quotations SET quotation_status = 0 WHERE quotation_id = {$quotationId}";
+ $sql = "UPDATE quotations SET active = 0 WHERE quotation_id = {$quotationId}";
 
- //$orderItem = "UPDATE order_item SET order_item_status = 2 WHERE  order_id = {$orderId}";
+ //$quotationItem = "UPDATE quotation_item SET quotation_item_status = 2 WHERE  quotation_id = {$quotationId}";
 
  if($connect->query($sql) === TRUE) {
  	$valid['success'] = true;
@@ -25,4 +25,4 @@ if($quotationId) {
 
  echo json_encode($valid);
  
-} // /if $_POST
+} 
