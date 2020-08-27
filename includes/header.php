@@ -75,6 +75,14 @@
         <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
             <li id="navUnit"><a href="unit_of_measure.php"><i class="glyphicon glyphicon-gbp"></i>  Unidade de medida</a></li>        
         <?php } ?>
+
+        <li class="dropdown" id="navQuotations">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-unchecked"></i> Orçamento <span class="caret"></span></a>
+          <ul class="dropdown-menu">            
+            <li id="topNavAddQuotation"><a href="quotations.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Novo Orçamento</a></li>
+            <li id="topNavManageQuotation"><a href="quotations.php?o=manquo"> <i class="glyphicon glyphicon-edit"></i> Gerenciar Orçamentos</a></li>
+          </ul>
+        </li> 
 		
         <li class="dropdown" id="navOrder">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-shopping-cart"></i> Orders <span class="caret"></span></a>
